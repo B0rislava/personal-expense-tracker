@@ -1,0 +1,142 @@
+[
+  {
+    "type": "income",
+    "amount": 3500,
+    "category": "Salary",
+    "date": "2026-02-01",
+    "description": "Monthly salary payment"
+  },
+  {
+    "type": "expense",
+    "amount": 1200,
+    "category": "Utilities",
+    "date": "2026-02-03",
+    "description": "Rent payment"
+  },
+  {
+    "type": "expense",
+    "amount": 85.50,
+    "category": "Food",
+    "date": "2026-02-05",
+    "description": "Grocery shopping at Whole Foods"
+  },
+  {
+    "type": "expense",
+    "amount": 45,
+    "category": "Transportation",
+    "date": "2026-02-06",
+    "description": "Gas refill"
+  },
+  {
+    "type": "income",
+    "amount": 500,
+    "category": "Freelance",
+    "date": "2026-02-07",
+    "description": "Website design project"
+  },
+  {
+    "type": "expense",
+    "amount": 120,
+    "category": "Entertainment",
+    "date": "2026-02-08",
+    "description": "Concert tickets"
+  },
+  {
+    "type": "expense",
+    "amount": 65.25,
+    "category": "Food",
+    "date": "2026-02-09",
+    "description": "Dinner with friends"
+  },
+  {
+    "type": "expense",
+    "amount": 150,
+    "category": "Utilities",
+    "date": "2026-02-10",
+    "description": "Electricity and water bills"
+  },
+  {
+    "type": "expense",
+    "amount": 35,
+    "category": "Transportation",
+    "date": "2026-02-10",
+    "description": "Uber rides"
+  },
+  {
+    "type": "expense",
+    "amount": 200,
+    "category": "Healthcare",
+    "date": "2026-02-11",
+    "description": "Doctor visit and medication"
+  },
+  {
+    "type": "expense",
+    "amount": 95,
+    "category": "Food",
+    "date": "2026-02-11",
+    "description": "Weekly groceries"
+  },
+  {
+    "type": "income",
+    "amount": 750,
+    "category": "Bonus",
+    "date": "2026-02-11",
+    "description": "Performance bonus"
+  },
+  {
+    "type": "expense",
+    "amount": 49.99,
+    "category": "Entertainment",
+    "date": "2026-02-05",
+    "description": "Streaming services subscription"
+  },
+  {
+    "type": "expense",
+    "amount": 180,
+    "category": "Education",
+    "date": "2026-02-04",
+    "description": "Online course subscription"
+  },
+  {
+    "type": "expense",
+    "amount": 25,
+    "category": "Other",
+    "date": "2026-02-07",
+    "description": "Birthday gift"
+  },
+  {
+    "type": "income",
+    "amount": 3500,
+    "category": "Salary",
+    "date": "2026-01-01",
+    "description": "Monthly salary payment"
+  },
+  {
+    "type": "expense",
+    "amount": 1200,
+    "category": "Utilities",
+    "date": "2026-01-03",
+    "description": "Rent payment"
+  },
+  {
+    "type": "expense",
+    "amount": 150,
+    "category": "Food",
+    "date": "2026-01-15",
+    "description": "Grocery shopping"
+  },
+  {
+    "type": "expense",
+    "amount": 80,
+    "category": "Entertainment",
+    "date": "2026-01-20",
+    "description": "Movie night and dinner"
+  },
+  {
+    "type": "income",
+    "amount": 300,
+    "category": "Investments",
+    "date": "2026-01-25",
+    "description": "Stock dividends"
+  }
+]
