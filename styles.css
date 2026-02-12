@@ -19,6 +19,21 @@
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
+[data-theme="dark"] {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border: #334155;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--bg);
@@ -72,6 +87,31 @@ h1 {
     font-size: 1.75rem;
     color: var(--primary);
     margin-bottom: 0.5rem;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.theme-toggle {
+    background: var(--bg);
+    border: 2px solid var(--border);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    transition: all 0.3s;
+}
+
+.theme-toggle:hover {
+    background: var(--border);
+    transform: rotate(20deg);
 }
 
 .header-subtitle {
@@ -135,6 +175,7 @@ main {
     margin-top: 0.5rem;
 }
 
+/* Controls */
 .controls {
     background: var(--surface);
     padding: 1.5rem;
@@ -150,6 +191,7 @@ main {
     margin-bottom: 1rem;
 }
 
+/* Buttons */
 button {
     padding: 0.625rem 1.25rem;
     border: none;
@@ -264,6 +306,34 @@ input[type="file"] {
     display: none;
 }
 
+input[type="color"] {
+    width: 50px;
+    height: 35px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.category-color-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.5rem;
+    background: var(--bg);
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.category-color-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
 section {
     background: var(--surface);
     padding: 1.5rem;
@@ -351,6 +421,21 @@ article.transaction:focus-within {
 .transaction-category {
     font-weight: 600;
     font-size: 0.9375rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.recurring-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    padding: 0.125rem 0.5rem;
+    background: var(--warning);
+    color: white;
+    border-radius: 12px;
+    font-weight: 500;
 }
 
 .transaction-description {

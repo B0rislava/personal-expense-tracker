@@ -4,6 +4,13 @@ async function init() {
 
         state.transactions = await getAllTransactions();
 
+        await processRecurringTransactions();
+
+        state.transactions = await getAllTransactions();
+
+        document.documentElement.setAttribute('data-theme', state.settings.theme);
+        document.getElementById('themeIcon').textContent = state.settings.theme === 'dark' ? '☀️' : '🌙';
+
         document.getElementById('filterPeriod').value = state.filters.period;
         document.getElementById('filterType').value = state.filters.type;
         document.getElementById('filterCategory').value = state.filters.category;

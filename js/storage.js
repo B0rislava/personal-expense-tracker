@@ -87,8 +87,10 @@ function getSettings() {
     const defaults = {
         currency: '$',
         defaultPeriod: 'month',
+        theme: 'light',
         expenseCategories: ['Food', 'Transportation', 'Utilities', 'Entertainment', 'Healthcare', 'Education', 'Other'],
-        incomeCategories: ['Salary', 'Bonus', 'Freelance', 'Investments', 'Other']
+        incomeCategories: ['Salary', 'Bonus', 'Freelance', 'Investments', 'Other'],
+        categoryColors: {}
     };
 
     const saved = localStorage.getItem('settings');
@@ -97,6 +99,32 @@ function getSettings() {
 
 function saveSettings(settings) {
     localStorage.setItem('settings', JSON.stringify(settings));
+}
+
+const CURRENCY_RATES = {
+    '$': 1.00,
+    '€': 0.92,
+    '£': 0.79,
+    '¥': 149.50,
+};
+
+function convertCurrency(amount, fromCurrency, toCurrency) {
+    const usdAmount = amount / CURRENCY_RATES[fromCurrency];
+    return usdAmount * CURRENCY_RATES[toCurrency];
+}
+
+async function convertAllTransactionsCurrency(oldCurrency, newCurrency) {
+    if (oldCurrency === newCurrency) return;
+
+    const transactions = await getAllTransactions();
+
+    for (const transaction of transactions) {
+        const convertedAmount = convertCurrency(transaction.amount, oldCurrency, newCurrency);
+        await updateTransaction(transaction.id, {
+            ...transaction,
+            amount: Math.round(convertedAmount * 100) / 100
+        });
+    }
 }
 
 function getSessionFilters() {
@@ -123,4 +151,39 @@ function getLastVisit() {
         }
     }
     return null;
+}
+
+async function processRecurringTransactions() {
+    const transactions = await getAllTransactions();
+    const now = new Date();
+    const currentMonth = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+
+    const recurring = transactions.filter(t => t.recurring);
+
+    for (const template of recurring) {
+        const transactionMonth = template.date.substring(0, 7);
+
+        if (transactionMonth !== currentMonth) {
+            const day = template.date.substring(8, 10);
+            const newDate = `${currentMonth}-${day}`;
+
+            const exists = transactions.some(t =>
+                t.category === template.category &&
+                t.amount === template.amount &&
+                t.date === newDate &&
+                t.type === template.type
+            );
+
+            if (!exists && new Date(newDate) <= now) {
+                await addTransaction({
+                    type: template.type,
+                    amount: template.amount,
+                    category: template.category,
+                    date: newDate,
+                    description: template.description,
+                    recurring: false
+                });
+            }
+        }
+    }
 }

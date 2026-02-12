@@ -13,8 +13,15 @@
 
 <header>
     <div class="container">
-        <h1>Personal Finance Tracker</h1>
-        <p class="header-subtitle">Manage your expenses and income effectively</p>
+        <div class="header-content">
+            <div>
+                <h1>Personal Finance Tracker</h1>
+                <p class="header-subtitle">Manage your expenses and income effectively</p>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
     </div>
 </header>
 
@@ -149,6 +156,13 @@
                 <label for="transactionDescription">Description</label>
                 <input type="text" id="transactionDescription" placeholder="Optional description">
             </div>
+
+            <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" id="transactionRecurring">
+                    <span>Recurring transaction (monthly)</span>
+                </label>
+            </div>
         </form>
         <div class="modal-footer">
             <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
@@ -193,6 +207,11 @@
             <div class="form-group">
                 <label>Income Categories (one per line)</label>
                 <label for="incomeCategories"></label><textarea id="incomeCategories" rows="5"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Category Colors</label>
+                <div id="categoryColorList" class="category-color-list"></div>
             </div>
         </form>
         <div class="modal-footer">

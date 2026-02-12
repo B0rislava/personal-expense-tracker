@@ -16,10 +16,12 @@ function openModal(editId = null) {
         document.getElementById('transactionCategory').value = transaction.category;
         document.getElementById('transactionDate').value = transaction.date;
         document.getElementById('transactionDescription').value = transaction.description || '';
+        document.getElementById('transactionRecurring').checked = transaction.recurring || false;
     } else {
         title.textContent = 'Add Transaction';
         form.reset();
         document.getElementById('transactionDate').value = new Date().toISOString().split('T')[0];
+        document.getElementById('transactionRecurring').checked = false;
         updateCategorySelect();
     }
 
@@ -39,8 +41,29 @@ function openSettings() {
     document.getElementById('expenseCategories').value = state.settings.expenseCategories.join('\n');
     document.getElementById('incomeCategories').value = state.settings.incomeCategories.join('\n');
 
+    renderCategoryColors();
+
     document.getElementById('settingsModal').classList.add('active');
     document.getElementById('settingsCurrency').focus();
+}
+
+function renderCategoryColors() {
+    const container = document.getElementById('categoryColorList');
+    const allCategories = [
+        ...state.settings.expenseCategories,
+        ...state.settings.incomeCategories
+    ];
+
+    container.innerHTML = allCategories.map(category => {
+        const color = state.settings.categoryColors[category] || '#3b82f6';
+        return `
+            <div class="category-color-item">
+                <span>${category}</span>
+                <input type="color" value="${color}" data-category="${category}" class="category-color-picker">
+                <button class="btn-icon" data-category="${category}" data-action="reset-color" aria-label="Reset color">↺</button>
+            </div>
+        `;
+    }).join('');
 }
 
 function closeSettings() {

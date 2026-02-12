@@ -20,11 +20,16 @@ function renderChart() {
     }
 
     const total = Object.values(categoryTotals).reduce((a, b) => a + b, 0);
-    const colors = [
+
+    const defaultColors = [
         '#ef4444', '#f97316', '#f59e0b', '#84cc16',
         '#22c55e', '#14b8a6', '#06b6d4', '#3b82f6',
         '#6366f1', '#8b5cf6', '#a855f7', '#ec4899'
     ];
+
+    const colors = categories.map((category, i) =>
+        state.settings.categoryColors[category] || defaultColors[i % defaultColors.length]
+    );
 
     canvas.width = 300;
     canvas.height = 300;
@@ -34,7 +39,7 @@ function renderChart() {
         const slice = (categoryTotals[category] / total) * Math.PI * 2;
 
         ctx.beginPath();
-        ctx.fillStyle = colors[i % colors.length];
+        ctx.fillStyle = colors[i];
         ctx.moveTo(canvas.width / 2, canvas.height / 2);
         ctx.arc(
             canvas.width / 2,
@@ -54,7 +59,7 @@ function renderChart() {
         const percentage = ((categoryTotals[category] / total) * 100).toFixed(1);
         return `
             <div class="legend-item" role="listitem">
-                <span class="legend-color" style="background: ${colors[i % colors.length]}" aria-hidden="true"></span>
+                <span class="legend-color" style="background: ${colors[i]}" aria-hidden="true"></span>
                 <span>${category}: ${percentage}%</span>
             </div>
         `;

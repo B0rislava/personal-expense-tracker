@@ -71,35 +71,43 @@ function renderTransactions() {
             </div>
         `;
     } else {
-        container.innerHTML = filtered.map(t => `
-            <article class="transaction ${t.type}" data-id="${t.id}" tabindex="0">
-                <div class="transaction-icon" aria-hidden="true">
-                    ${t.type === 'income' ? '↑' : '↓'}
-                </div>
-                <div class="transaction-details">
-                    <div class="transaction-category">${t.category}</div>
-                    ${t.description ? `<div class="transaction-description">${t.description}</div>` : ''}
-                    <time class="transaction-date" datetime="${t.date}">
-                        ${new Date(t.date).toLocaleDateString('en-US', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        })}
-                    </time>
-                </div>
-                <div class="transaction-amount">
-                    ${t.type === 'income' ? '+' : '-'}${state.settings.currency}${t.amount.toFixed(2)}
-                </div>
-                <div class="transaction-actions">
-                    <button class="btn-icon edit" data-id="${t.id}" aria-label="Edit transaction ${t.category}">
-                        ✎
-                    </button>
-                    <button class="btn-icon delete" data-id="${t.id}" aria-label="Delete transaction ${t.category}">
-                        ×
-                    </button>
-                </div>
-            </article>
-        `).join('');
+        container.innerHTML = filtered.map(t => {
+            const categoryColor = state.settings.categoryColors[t.category] || '';
+            const colorStyle = categoryColor ? `border-left-color: ${categoryColor};` : '';
+
+            return `
+                <article class="transaction ${t.type}" data-id="${t.id}" tabindex="0" style="${colorStyle}">
+                    <div class="transaction-icon" aria-hidden="true">
+                        ${t.type === 'income' ? '↑' : '↓'}
+                    </div>
+                    <div class="transaction-details">
+                        <div class="transaction-category">
+                            ${t.category}
+                            ${t.recurring ? '<span class="recurring-badge"> Recurring</span>' : ''}
+                        </div>
+                        ${t.description ? `<div class="transaction-description">${t.description}</div>` : ''}
+                        <time class="transaction-date" datetime="${t.date}">
+                            ${new Date(t.date).toLocaleDateString('en-US', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            })}
+                        </time>
+                    </div>
+                    <div class="transaction-amount">
+                        ${t.type === 'income' ? '+' : '-'}${state.settings.currency}${t.amount.toFixed(2)}
+                    </div>
+                    <div class="transaction-actions">
+                        <button class="btn-icon edit" data-id="${t.id}" aria-label="Edit transaction ${t.category}">
+                            ✎
+                        </button>
+                        <button class="btn-icon delete" data-id="${t.id}" aria-label="Delete transaction ${t.category}">
+                            ×
+                        </button>
+                    </div>
+                </article>
+            `;
+        }).join('');
     }
 
     container.setAttribute('aria-busy', 'false');
